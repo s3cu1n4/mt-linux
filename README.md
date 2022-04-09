@@ -33,10 +33,9 @@ insmod hids_driver.ko
 
 
 ## 其他
-注意：使用 ` insmod ` 方式手动加载的内核模块，本软件不会主动卸载，需要自己使用 
+注意：使用 ` insmod ` 命令手动加载的内核模块，本软件不会主动卸载，需要自己手动卸载内核模块
+
 
 ```shell script
 rmmod hids_driver
 ```
- 卸载内核模块
-
