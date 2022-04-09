@@ -6,6 +6,18 @@
 
 本软件提供了编译后的可执行文件，可直接下载本软件使用。
 
+由于需要加载内核模块，请在Linux root用户下使用该软件
+```shell script
+
+# 添加可执行权限
+chmod +x mt-linux
+
+# 运行mt-linux
+./mt-linux
+
+```
+
+
 若安装AgentSmith-HIDS Driver或下载失败，请自行编译内核模块,
 编译方式可参考：
 
