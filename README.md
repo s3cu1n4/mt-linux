@@ -1,6 +1,6 @@
 # mt-linux
 
-一款基于 Elkeid(AgentSmith-HIDS) Driver 的实时 Linux 信息采集软件，使用AgentSmith-HIDS 的预编译内核模块，可快速收集Linux系统内核级进程执行，特权升级监控，网络审计等信息，在没有部署Linux HIDS产品的情况下，可使用该软件进行应急响应排查。
+一款基于 Elkeid(AgentSmith-HIDS) Driver 的实时 Linux 内核信息采集软件，可快速收集Linux系统内核级进程执行，特权升级监控，网络审计等信息，在没有部署Linux HIDS产品的情况下，可使用该软件进行应急事件处理排查。
 
 ## 使用方式
 
