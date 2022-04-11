@@ -15,7 +15,7 @@ int Getsysmem();
 
 
 // c call go
-void PrintGo(int c, int a,char *s);
+void PrintGo(char *s);
 void CheckMod();
 
 

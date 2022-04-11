@@ -22,7 +22,7 @@ static int rb_read_message(int fd)
         if (i == rc || g_rb_msg[i] == 0x17) {
             g_rb_msg[i] = 0;
             if (!g_rb_quiet && i > s) {
-                PrintGo(s,rc,&g_rb_msg[s]);
+                PrintGo(&g_rb_msg[s]);
             }
                                
             s = i + 1;
