@@ -18,46 +18,46 @@ func RemoveIndex(s []string, index, num int) []string {
 	return append(s[:index], s[index+num:]...)
 }
 
-func SliceToMap(s_key, s_value []string, datatype int64) {
+func SliceToMap(s_key []string, s_value [][]byte, datatype int64) {
 
-	lenvalue := len(s_value) - len(s_key)
-	var isargv bool
+	// lenvalue := len(s_value) - len(s_key)
+	// var isargv bool
 	var info string
-	if datatype == 59 {
-		if s_value[len(s_value)-3] != "-1" {
-			lenvalue = lenvalue - 3
-			ssh := fmt.Sprintf("%s:%s==>%s:%s", s_value[len(s_value)-6], s_value[len(s_value)-5], s_value[len(s_value)-4], s_value[len(s_value)-3])
-			s_value = RemoveIndex(s_value, len(s_value)-6, 3)
-			s_value[len(s_value)-3] = ssh
-		}
+	// if datatype == 59 {
+	// 	if s_value[len(s_value)-3] != "-1" {
+	// 		lenvalue = lenvalue - 3
+	// 		ssh := fmt.Sprintf("%s:%s==>%s:%s", s_value[len(s_value)-6], s_value[len(s_value)-5], s_value[len(s_value)-4], s_value[len(s_value)-3])
+	// 		s_value = RemoveIndex(s_value, len(s_value)-6, 3)
+	// 		s_value[len(s_value)-3] = ssh
+	// 	}
 
-	}
+	// }
 
 	for s_key_index := range s_key {
-		if lenvalue > 0 {
-			var argv string
-			if s_key[s_key_index] == "argv" {
-				isargv = true
-				argv = strings.Join(s_value[s_key_index:s_key_index+lenvalue+1], " ")
-				info = info + fmt.Sprintf("argv:%s, ", argv)
-				continue
-			}
+		// if lenvalue > 0 {
+		// 	var argv string
+		// 	if s_key[s_key_index] == "argv" {
+		// 		isargv = true
+		// 		argv = strings.Join(s_value[s_key_index:s_key_index+lenvalue+1], " ")
+		// 		info = info + fmt.Sprintf("argv:%s, ", argv)
+		// 		continue
+		// 	}
 
-		}
-		if isargv {
-			info = info + fmt.Sprintf("%s:%s, ", s_key[s_key_index], s_value[s_key_index+lenvalue])
+		// }
+		// if isargv {
+		// 	info = info + fmt.Sprintf("%s:%s, ", s_key[s_key_index], s_value[s_key_index+lenvalue])
 
-		} else {
-			info = info + fmt.Sprintf("%s:%s, ", s_key[s_key_index], s_value[s_key_index])
+		// } else {
+		info = info + fmt.Sprintf("%s:%v, ", s_key[s_key_index], s_value[s_key_index])
 
-		}
+		// }
 	}
 	info = strings.Trim(info, ", ")
 	logs.Infof("DataType:%s, %s", DataType[datatype], info)
 }
 
-func DataToMap(data []string) {
-	inttype, _ := strconv.ParseInt(data[0], 10, 64)
+func DataToMap(data [][]byte) {
+	inttype, _ := strconv.ParseInt(string(data[0]), 10, 64)
 
 	datastruct := DataStruct[inttype]
 	if datastruct != nil {
