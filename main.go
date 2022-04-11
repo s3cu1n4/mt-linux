@@ -62,7 +62,7 @@ func readhookdata() {
 		}
 		// wg.Done()
 	}()
-	go exitsignal(fd)
+	exitsignal(fd)
 	wg.Wait()
 }
 
