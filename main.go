@@ -35,8 +35,8 @@ func readhookdata() {
 				if i == n || data[i] == 0x17 {
 					data[i] = 0
 					if i > s {
-						fmt.Println(string(data[:i]))
-						// dataChan <- data
+						// fmt.Println(string(data[:i]))
+						dataChan <- data[:i]
 					}
 					s = i + i
 				} else if data[i] == 0x1e {
