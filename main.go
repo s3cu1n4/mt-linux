@@ -33,6 +33,7 @@ func readhookdata() {
 			n, err := syscall.Read(fd, data)
 			if err != nil {
 				logs.Error("read fd error", err.Error())
+				return
 			}
 			for i := 0; i <= n; i++ {
 				if i == n || data[i] == 0x17 {
@@ -52,13 +53,13 @@ func readhookdata() {
 			data, ok := <-dataChan
 			if !ok || exitinfo {
 				// wg.Done()
-				break
+				return
 			} else {
 				b := bytes.Split(data, []byte{0x1e})
 				common.DataToMap(b)
 			}
 		}
-		wg.Done()
+		// wg.Done()
 	}()
 	go exitsignal(fd)
 	wg.Wait()
