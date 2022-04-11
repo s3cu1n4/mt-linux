@@ -34,6 +34,7 @@ func readhookdata() {
 			n, err := syscall.Read(fd, data)
 			if err != nil {
 				logs.Error("read fd error", err.Error())
+				wg.Done()
 				return
 			}
 			for i := 0; i <= n; i++ {
@@ -60,7 +61,6 @@ func readhookdata() {
 				common.DataToMap(b)
 			}
 		}
-		// wg.Done()
 	}()
 	exitsignal(fd)
 	wg.Wait()
