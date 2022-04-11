@@ -4,11 +4,14 @@ import (
 	"bytes"
 	"mt-linux/common"
 	"os"
+	"os/signal"
 	"sync"
 	"syscall"
 
 	"github.com/s3cu1n4/logs"
 )
+
+var exitinfo bool
 
 func readhookdata() {
 	fd, err := syscall.Open("/proc/elkeid-endpoint", syscall.O_RDONLY, 0)
@@ -47,19 +50,41 @@ func readhookdata() {
 		defer wg.Done()
 		for {
 			data, ok := <-dataChan
-			if !ok {
+			if !ok || exitinfo {
+				wg.Done()
 				return
 			} else {
 				b := bytes.Split(data, []byte{0x1e})
 				common.DataToMap(b)
-				// for _, val := range b {
-				// 	fmt.Printf("%s,", string(val))
-				// }
-				// fmt.Println()
 			}
 		}
 	}()
+	go exitsignal(fd)
 	wg.Wait()
+}
+
+func exitsignal(fd syscall.Handle) {
+	sigs := make(chan os.Signal, 1)
+	done := make(chan bool, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		sig := <-sigs
+		logs.Info("get signal: ", sig)
+		done <- true
+	}()
+	logs.Info("Server Start Awaiting Signal")
+
+	<-done
+	//close fd
+	err := syscall.Close(fd)
+	if err != nil {
+		logs.Error(err)
+
+	}
+	exitinfo = true
+	common.Rmmod()
+
+	logs.Info("Exit sucess")
 }
 
 func main() {
