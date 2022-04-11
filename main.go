@@ -63,7 +63,7 @@ func readhookdata() {
 	wg.Wait()
 }
 
-func exitsignal(fd syscall.Handle) {
+func exitsignal(fd int) {
 	sigs := make(chan os.Signal, 1)
 	done := make(chan bool, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
