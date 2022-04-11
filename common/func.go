@@ -48,7 +48,7 @@ func SliceToMap(s_key []string, s_value [][]byte, datatype int64) {
 		// 	info = info + fmt.Sprintf("%s:%s, ", s_key[s_key_index], s_value[s_key_index+lenvalue])
 
 		// } else {
-		info = info + fmt.Sprintf("%s:%v, ", s_key[s_key_index], s_value[s_key_index])
+		info = info + fmt.Sprintf("%s:%s, ", s_key[s_key_index], string(s_value[s_key_index]))
 
 		// }
 	}
