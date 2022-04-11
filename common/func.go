@@ -14,10 +14,6 @@ import (
 	"github.com/s3cu1n4/logs"
 )
 
-func RemoveIndex(s []string, index, num int) []string {
-	return append(s[:index], s[index+num:]...)
-}
-
 func SliceToMap(s_key []string, s_value [][]byte, datatype int64) {
 
 	var info string
