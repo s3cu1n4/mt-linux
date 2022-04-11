@@ -51,13 +51,14 @@ func readhookdata() {
 		for {
 			data, ok := <-dataChan
 			if !ok || exitinfo {
-				wg.Done()
-				return
+				// wg.Done()
+				break
 			} else {
 				b := bytes.Split(data, []byte{0x1e})
 				common.DataToMap(b)
 			}
 		}
+		wg.Done()
 	}()
 	go exitsignal(fd)
 	wg.Wait()
