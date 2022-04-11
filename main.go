@@ -59,12 +59,12 @@ func readhookdata() {
 
 				b := bytes.Split(data, []byte{0x1e})
 				for _, val := range b {
-					fmt.Printf("%s", string(val))
+					fmt.Printf("%s,", string(val))
 				}
 				fmt.Println()
 			}
 
-			fmt.Println("asdfasdfasfd")
+			// fmt.Println("asdfasdfasfd")
 		}
 	}()
 	wg.Wait()
