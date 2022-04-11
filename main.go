@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"mt-linux/common"
 	"os"
@@ -39,9 +40,10 @@ func readhookdata() {
 						dataChan <- data[:i]
 					}
 					s = i + i
-				} else if data[i] == 0x1e {
-					data[i] = ','
 				}
+				// else if data[i] == 0x1e {
+				// 	data[i] = ','
+				// }
 			}
 		}
 	}()
@@ -53,7 +55,13 @@ func readhookdata() {
 			if !ok {
 				return
 			} else {
-				fmt.Println(string(data))
+				// fmt.Println(string(data))
+
+				b := bytes.Split(data, []byte{0x1e})
+				for _, val := range b {
+					fmt.Printf("%s", string(val))
+				}
+				fmt.Println()
 			}
 
 			fmt.Println("asdfasdfasfd")
