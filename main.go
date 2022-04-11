@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+	"time"
 
 	"github.com/s3cu1n4/logs"
 )
@@ -85,6 +86,7 @@ func exitsignal(fd int) {
 	}
 	exitinfo = true
 	common.Rmmod()
+	time.Sleep(2 * time.Second)
 
 	logs.Info("Exit sucess")
 }

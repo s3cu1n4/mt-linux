@@ -9,7 +9,6 @@ import (
 	"os"
 	"os/exec"
 	"strings"
-	"time"
 
 	"github.com/s3cu1n4/logs"
 )
@@ -72,7 +71,7 @@ func insmod(kmodname string) (output string, err error) {
 func Rmmod() (err error) {
 	if isinsmod {
 		logs.Info("need rmmod hids_driver ")
-		time.Sleep(1 * time.Second)
+		// time.Sleep(1 * time.Second)
 		command := exec.Command("rmmod", KMOD_NAME)
 		err := command.Run()
 		if err != nil {
